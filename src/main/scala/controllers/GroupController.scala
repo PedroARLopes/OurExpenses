@@ -12,16 +12,31 @@ class GroupController extends ScalatraServlet with JacksonJsonSupport with Authe
 
   override protected implicit lazy val jsonFormats: Formats = DefaultFormats
 
+  val groups = List(
+    Group(1,"Scala Group"),
+    Group(2,"My Expenses")
+  )
+
   before(){
     basicAuth
     contentType = formats("json")
   }
 
   get("/"){
-    List(
-      Group(1,"Scale Group"),
-      Group(2,"My Expenses")
-    )
+    groups
+  }
+
+  post("/"){
+    val jsonString = parse(request.body)
+    val group = jsonString.extract[Group]
+
+    if(response.getStatus == 200){
+      List(group)
+    }
+  }
+
+  get("/:groupId"){
+
   }
 
 }
