@@ -3,7 +3,7 @@
   */
 import javax.servlet.ServletContext
 
-import controllers.HomeController
+import controllers.{GroupController, HomeController}
 import org.scalatra.LifeCycle
 
 class ScalatraBootstrap extends LifeCycle {
@@ -13,6 +13,7 @@ class ScalatraBootstrap extends LifeCycle {
     // Home controller
     context mount (new HomeController, "/")
 
+    context mount (new GroupController, "/groups")
 
   }
 }
