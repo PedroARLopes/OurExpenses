@@ -5,4 +5,4 @@ package models
   */
 object CategoryType extends Enumeration { val Expense, Income = Value }
 
-case class Category(CategoryId: Int, GroupId: Int, Name: String, enum: CategoryType.Value, Total: Double = 0.0)
+case class Category(CategoryId: Int, GroupId: Int, Name: String, Type: CategoryType.Value, Total: Double = 0.0)
