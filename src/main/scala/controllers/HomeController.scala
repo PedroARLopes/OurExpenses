@@ -1,11 +1,12 @@
 package controllers
 
 import org.scalatra._
+import slick.jdbc.H2Profile.api._
 
 /**
   * Created by Pedro Lopes on 20/06/2017.
   */
-class HomeController extends ScalatraServlet with AuthenticationSupport {
+class HomeController(val db: Database) extends ScalatraServlet with AuthenticationSupport {
 
   get("/*"){
     basicAuth
