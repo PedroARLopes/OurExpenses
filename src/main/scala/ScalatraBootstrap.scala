@@ -1,36 +1,30 @@
 /**
   * Created by Pedro Lopes on 20/06/2017.
   */
-import java.util.Properties
 import javax.servlet.ServletContext
 
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import controllers.{GroupController, HomeController}
 import org.scalatra._
 import org.slf4j.LoggerFactory
-import slick.jdbc.H2Profile.api._
+import repositories.UsersRepository
+import slick.jdbc.MySQLProfile.api._
+
 
 class ScalatraBootstrap extends LifeCycle {
 
   val logger = LoggerFactory.getLogger(getClass)
 
-  var cpds = {
-    val props = new Properties
-    props.load(getClass.getResourceAsStream("/c3p0.properties"))
-    val cpds = new ComboPooledDataSource
-    cpds.setProperties(props)
-    logger.info("Created c3p0 connection pool")
-    cpds
-  }
+  var cpds =  new ComboPooledDataSource
+
+  logger.info("Created c3p0 connection pool")
 
   override def init(context: ServletContext) {
 
-    val db = Database.forDataSource(cpds,None)
-
-    //val db = Database.forURL("jdbc:mysql://localhost/ourexpenses", user="root", password="password", driver = "com.mysql.jdbc.Driver")
+    val db = Database.forDataSource(cpds, Option(10))
 
     // Home controller
-    context mount (new HomeController(db), "/")
+    context mount (new HomeController(new UsersRepository(db)), "/")
 
     //Groups Controller
     context mount (new GroupController, "/groups")

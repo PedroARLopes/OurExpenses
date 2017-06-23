@@ -14,7 +14,7 @@ class MyBasicAuthStrategy(protected override val app: ScalatraBase, realm: Strin
   extends BasicAuthStrategy[User](app,realm) {
 
   override protected def validate(userName: String, password: String)(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
-    if (userName == "pedrolopes@gmail.com" && password == "password") Some(User(1,"pedrolopes@gmail.com","password"))
+    if (userName == "pedrolopes@gmail.com" && password == "password") Some(User(1,"Pedro","pedrolopes@gmail.com","password"))
     else None
   }
 
@@ -27,7 +27,7 @@ trait AuthenticationSupport extends ScentrySupport[User] with BasicAuthSupport[U
 
   var realm = "Basic Auth Example"
 
-  protected def fromSession = { case email: String => User(1,email,"")}
+  protected def fromSession = { case email: String => User(1,"Pedro",email,"")}
 
   protected def toSession = { case user: User => user.Email }
 

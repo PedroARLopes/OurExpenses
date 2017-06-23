@@ -5,4 +5,4 @@ package models
   */
 object CollaboratorType extends Enumeration { val Owner, Collaborator = Value }
 
-case class Collaborator(CollaboratorId:  Int, UserId: Int, GroupId: Int, enum: CollaboratorType.Value)
+case class Collaborator(CollaboratorId:  Long, UserId: Int, GroupId: Int, enum: CollaboratorType.Value)
