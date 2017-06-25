@@ -6,7 +6,7 @@ import org.scalatra.ScalatraServlet
 /**
   * Created by Pedro Lopes on 20/06/2017.
   */
-class GroupController extends ScalatraServlet with AuthenticationSupport{
+class GroupController extends ScalatraServlet{
 
   /*
   override protected implicit lazy val jsonFormats: Formats = DefaultFormats
